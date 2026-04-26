@@ -1,0 +1,4 @@
+# Add project dependencies here.
+# PyGithub is required for DNA propagation (--remote mode).
+
+PyGithub>=2.1.1
