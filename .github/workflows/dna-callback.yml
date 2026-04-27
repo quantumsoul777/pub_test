@@ -1,10 +1,10 @@
 name: DNA Callback
 
 # Propagated by zero-friction. Do not edit manually.
-# Fires on every push and notifies zero-friction so the health dashboard stays current.
+# Manual trigger only — automatic push callbacks are disabled to avoid Actions cost.
 
 on:
-  push:
+  workflow_dispatch:
 
 jobs:
   callback:
@@ -15,8 +15,12 @@ jobs:
         with:
           github-token: ${{ secrets.ZERO_FRICTION_DISPATCH_TOKEN || github.token }}
           script: |
+            if (context.repo.repo === 'zero-friction') {
+              console.log('zero-friction self-callback skipped')
+              return
+            }
             if (!('${{ secrets.ZERO_FRICTION_DISPATCH_TOKEN }}')) {
-              console.log('ZERO_FRICTION_DISPATCH_TOKEN not set — skipping callback')
+              console.log('ZERO_FRICTION_DISPATCH_TOKEN not set - skipping callback')
               return
             }
             try {
