@@ -1,4 +1,6 @@
 # Add project dependencies here.
 # PyGithub is required for DNA propagation (--remote mode).
+# openai is required for the DNA alignment assessment (GitHub Models API).
 
 PyGithub>=2.1.1
+openai>=1.0.0
